@@ -9,21 +9,23 @@ This is a script used for taking the output from [SpinASM](http://www.spinsemi.c
 It is a very short script, but when going through various code changes in your SpinASM project, it is nice only needing to execute one command rather than a few.
 
 ## Setup
-First, make sure that both `srec_cat` and `ch341eeprom` are installed. Note where the `ch341eeprom` installation folder is, you will need this later.
+First, make sure that both `srec_cat` and `ch341eeprom` are installed. Note where the `ch341eeprom` installation folder is.
+To use the script with minimal changes, open `.bashrc` from your home directory and add the following:
+`alias ch341eeprom='/path/to/ch341eeprom'`
+This will allow you to run `ch341eeprom` without needing the full filepath. Please note that this path should be to the compiled program and not just the directory that the program lives in.
 
-To install `hex2eeprom`, simply clone this repository, or copy and paste the information found in `hex2eeprom.sh` in this repository. Note where you save this file, as you will need this location to execute the command from the terminal.
-
-Open the `hex2eeprom.sh` file in your text editor of choice. The code in this repository is relative to the Dogman Devices local directory - you will have to make a few changes to the code to be able to use it.
+To install `hex2eeprom`, simply clone this repository, or copy and paste the information found in `hex2eeprom.sh` in this repository. Note where you save this file. For convience, it is best to alias this as well. Open `.bashrc` and add the following:
+`alias hex2eeprom='/path/to/hex2eeprom.sh'`
+Otherwise, you will need to either run the script from the directory where the script lives, or call the entire file path.
 
 ### Change directory locations to suit your local machine
 
-In the second line of un-commented code, replace everything after `cd ` (including the following space) with the location of your ch341eeprom directory.
+In the second line of code, if you have no aliased ch341eeprom, add the following to the second line:
+`cd /path/to/ch341eepom` keeping in mind that this is just to the directory where the executable lives. 
 
 In the final line of un-commented code, replace `/home/greze/FV-1` with the name of your working directory for SpinASM projects.
 
 Save these changes.
-
-Please note that command listed in the comments for how to run the code is for the Dogman Devices local machine.
 
 ## How to Use
 
@@ -33,6 +35,6 @@ Open your terminal emulator of choice and navigate to the directory where you sa
 
 Run the following command:
 
-`sh /LOCATION/OF/hex2eeprom/hex2eeprom.sh FILENAME` with the location of your `hex2eeprom.sh` file and the name of your `.hex` file WITHOUT the `.hex` part written out.
+`sh /LOCATION/OF/hex2eeprom/hex2eeprom.sh FILENAME` with the location of your `hex2eeprom.sh` file and the name of your `.hex` file WITHOUT the `.hex` part written out. If you have aliased the script, you can just run `hex2eeprom FILENAME`
 
 After the initial setup, as long as the device you are writing to is connected and powered on, that is all you need to do to take a DSP project built with SpinASM and put it on a physical device.
